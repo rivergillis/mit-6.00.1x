@@ -16,3 +16,7 @@ def gcdIter(a, b):
         test -= 1
     return test
 
+def gcdRecur(a, b):
+    if b == 0:
+        return a
+    return gcdRecur(b, a % b)
