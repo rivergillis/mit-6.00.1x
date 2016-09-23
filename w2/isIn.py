@@ -6,6 +6,8 @@ def isIn(char, aStr):
     returns: True if char is in aStr; False otherwise
     resurively defined
     '''
+    if aStr == '':
+        return False
     midpoint = (len(aStr)//2)
     if char == aStr[midpoint]:
         return True
