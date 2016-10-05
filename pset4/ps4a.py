@@ -188,8 +188,10 @@ def calculateHandlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    # TO DO... <-- Remove this comment when you code this function
-
+    total = 0
+    for length in hand.values():
+        total += length
+    return total
 
 
 def playHand(hand, wordList, n):
