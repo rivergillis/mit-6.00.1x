@@ -29,6 +29,7 @@ def compChooseWord(hand, wordList, n):
     bestWord = None
     # For each word in the wordList
     for word in wordList:
+        print("checking " + word)
         # If you can construct the word from your hand
         if isValidWord(word, hand, wordList):
             # find out how much making that word is worth
@@ -124,8 +125,31 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this when you code this function
+    hand = None
+    while True:
+        ready = True
+        selection1 = selection2 = None
+        while selection1 != 'n' and selection1 != 'r' and selection1 != 'e':
+            selection1 = input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ")
+            if selection1 != 'n' and selection1 != 'r' and selection1 != 'e':
+                print("Invalid command.")
+        if selection1 == 'e':
+            break
+        if selection1 == 'r' and hand == None:
+            print('You have not played a hand yet. Please play a new hand first!')
+            ready = False
+        if ready:
+            while selection2 != 'u' and selection2 != 'c':
+                selection2 = input("Enter u to have yourself play, c to have the computer play: ")
+                if selection2 != 'u' and selection2 != 'c':
+                    print("Invalid command.")
+            if selection1 == 'n':
+                hand = dealHand(HAND_SIZE)
+            if selection2 == 'u':
+                playHand(hand, wordList, HAND_SIZE)
+            else:
+                compPlayHand(hand, wordList, HAND_SIZE)
+
 
         
 #
