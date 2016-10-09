@@ -205,7 +205,7 @@ class CiphertextMessage(Message):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -223,18 +223,45 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        best_num = 0
+        best_shift = 0
+        best_string = None
+        for i in range(27):
+            num_words = 0
+            possible_string = self.apply_shift(i)
+            possible_words = possible_string.split(" ")
+            for word in possible_words:
+                if is_word(self.valid_words, word):
+                    num_words += 1
+            if num_words > best_num:
+                best_num = num_words
+                best_shift = i
+                best_string = " ".join(possible_words)
+                #print("New best at shift " + str(i) + ": " + best_string)
+        return (best_shift, best_string)
+
 
 #Example test case (PlaintextMessage)
-plaintext = PlaintextMessage('hello', 2)
-print('Expected Output: jgnnq')
-print('Actual Output:', plaintext.get_message_text_encrypted())
+#plaintext = PlaintextMessage('hello', 2)
+#print('Expected Output: jgnnq')
+#print('Actual Output:', plaintext.get_message_text_encrypted())
 
 #plaintext = Message("hello")
 #print(plaintext.build_shift_dict(2))
 #print(plaintext.apply_shift(2))
 
 #Example test case (CiphertextMessage)
-ciphertext = CiphertextMessage('jgnnq')
-print('Expected Output:', (24, 'hello'))
-print('Actual Output:', ciphertext.decrypt_message())
+#ciphertext = CiphertextMessage('jgnnq')
+#print('Expected Output:', (24, 'hello'))
+#print('Actual Output:', ciphertext.decrypt_message())
+
+#plain2 = PlaintextMessage("Message is Nonsense words: soon dependent moral remember pool gentleman copper among good clear police homecoming cream marriage diamond disagree prison hollow prevent company gate modest rather pig century correction kneel coin story sight chance calculator bank bell efficient", 24)
+#encry = plain2.get_message_text_encrypted()
+
+#ciph2 = CiphertextMessage(encry)
+#print(ciph2.decrypt_message())
+
+def decrypt_story():
+    cipher = CiphertextMessage(get_story_string())
+    return cipher.decrypt_message()
+print(decrypt_story())
