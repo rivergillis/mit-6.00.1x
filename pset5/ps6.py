@@ -124,7 +124,12 @@ class Message(object):
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
         '''
-        pass #delete this line and replace with your code here
+        new_message = ""
+        shift_dict = self.build_shift_dict(shift)
+        for c in self.get_message_text():
+            new_message += shift_dict.get(c,c)
+        return new_message
+
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -216,10 +221,13 @@ class CiphertextMessage(Message):
         pass #delete this line and replace with your code here
 
 #Example test case (PlaintextMessage)
-plaintext = PlaintextMessage('hello', 2)
-print('Expected Output: jgnnq')
-print('Actual Output:', plaintext.get_message_text_encrypted())
+#plaintext = PlaintextMessage('hello', 2)
+#print('Expected Output: jgnnq')
+#print('Actual Output:', plaintext.get_message_text_encrypted())
+
+plaintext = Message("hello")
 print(plaintext.build_shift_dict(2))
+print(plaintext.apply_shift(2))
 
 #Example test case (CiphertextMessage)
 ciphertext = CiphertextMessage('jgnnq')
